@@ -20,7 +20,7 @@ logging.basicConfig(level=logging.DEBUG,
 logger = logging.getLogger(__name__)
 
 app = FastAPI(
-    title="Backend API for LLM-Base",
+    title="Backend API for Planillas-Asistencia",
     openapi_url="/api/v1/openapi.json"
 )
 
