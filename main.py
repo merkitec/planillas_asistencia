@@ -9,6 +9,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import StreamingResponse, FileResponse
 from pdf_to_excel_app import PDFtoExcelApp
 from pydantic import BaseModel
+import uvicorn
 
 # Configure logging
 os.makedirs("logs", exist_ok=True)
@@ -120,3 +121,6 @@ async def download_execute_query(sql: str):
         )
     except Exception as ex:
         return { "status": 1, "message": ex.args[0]}
+    
+if __name__ == "__main__":
+    uvicorn.run("main:app", host="0.0.0.0", port=8000, reload=True)    
