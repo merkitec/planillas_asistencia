@@ -184,7 +184,7 @@ def procesar_parte_pdf(parte_pdf_path, progress_queue):
     return data
 
 # Función principal para dividir y procesar el PDF en paralelo
-def extraer_datos_pdf_parallel(pdf_path, num_workers=10, progress_callback=None):
+def extraer_datos_pdf_parallel(pdf_path, num_workers=2, progress_callback=None):
     print("Inicio del proceso de extracción de datos PDF")
     
     start_time = time.time()
@@ -303,7 +303,7 @@ def procesar_saldo_parte_pdf(parte_pdf_path, progress_queue):
     progress_queue.put(1)
     return saldo_horas
 
-def extraer_saldo_horas_parallel(pdf_path, num_workers=4, progress_callback=None):
+def extraer_saldo_horas_parallel(pdf_path, num_workers=2, progress_callback=None):
     print("Inicio del proceso de extracción de Saldo de Horas en paralelo")
 
     start_time = time.time()
@@ -390,7 +390,7 @@ def ajustar_formato_celdas(output_file):
             ws.column_dimensions[column].width = adjusted_width
     wb.save(output_file)
 
-def guardar_en_excel(data, output_file, pdf_path, excel_path, num_workers=4):
+def guardar_en_excel(data, output_file, pdf_path, excel_path, num_workers=2):
     start_time_total = time.time()
     print(f"Inicio de guardado en Excel: {output_file}")
     

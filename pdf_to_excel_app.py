@@ -17,7 +17,7 @@ class PDFtoExcelApp():
         self._pdf_path = None
         self._excel_path = None
         self._output_file = None
-        self.num_workers = 5  # Valor predeterminado: "Adecuado"
+        self.num_workers = 2  # Valor predeterminado: "Adecuado"
 
     @property
     def pdf_path(self):
