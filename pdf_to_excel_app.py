@@ -117,32 +117,38 @@ class PDFtoExcelApp():
                 # self.label_excel.config(text="Faltan columnas requeridas: 'Codigo Empleado' y/o 'Tipo Jornada'.")
                 excel_path = None
                 # self.verificar_archivos_cargados()
-                return {'label_excel': "Faltan columnas requeridas: 'Codigo Empleado' y/o 'Tipo Jornada'.", 'excel_path': excel_path}
+                return {'label_excel': "Faltan columnas requeridas: 'Codigo Empleado' y/o 'Tipo Jornada'.", 'valid': False}
             
             # Verificar unicidad de 'Codigo Empleado'
             if not df_excel['Codigo Empleado'].is_unique:
                 # self.label_excel.config(text="Los valores en 'Codigo Empleado' no son únicos.")
                 excel_path = None
                 # self.verificar_archivos_cargados()
-                return {'label_excel': "Los valores en 'Codigo Empleado' no son únicos.", 'excel_path': excel_path}
+                return {'label_excel': "Los valores en 'Codigo Empleado' no son únicos.", 'valid': False}
             
             # Si todo es correcto, mostrar el nombre del archivo
             # self.label_excel.config(text=f"Excel: {os.path.basename(self._excel_path)}")
             # self.verificar_archivos_cargados()
-            return {'label_excel': f"Excel: {os.path.basename(excel_path)}", 'excel_path': excel_path}
-        except:
-            return {}
+            return {'label_excel': f"Excel: {os.path.basename(excel_path)}", 'valid': True}
+        except Exception as ex:
+            return {'label_excel': ex.args[0] , 'valid': False}
 
-    # def actualizar_progreso(self, paginas_procesadas, total_paginas):
+    def actualizar_progreso(self, paginas_procesadas, total_paginas):
+        pass
         # self.progress["maximum"] = total_paginas
         # self.progress["value"] = paginas_procesadas
         # self.label_progreso.config(text=f"Procesando página {paginas_procesadas}/{total_paginas}")
         # self.update_idletasks()
 
     def ejecutar_conversion(self):
+        result = self.validar_carga_excel(self._excel_path)
+        if not result['valid']:
+            raise(ValueError(result['label_excel']))
+
         if not self._pdf_path or not self._excel_path:
             return
-        self.progress["value"] = 0
+        
+        # self.progress["value"] = 0
         threading.Thread(target=self.procesar_pdf).start()
 
     def procesar_pdf(self):
