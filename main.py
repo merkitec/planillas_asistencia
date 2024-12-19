@@ -19,6 +19,8 @@ logging.basicConfig(level=logging.DEBUG,
                     handlers=[TimedRotatingFileHandler('logs/log.log', when="D", backupCount=10,)],
                     datefmt='%Y-%m-%dT%H:%M:%S')
 logger = logging.getLogger(__name__)
+logging.getLogger("pdfminer.psparser").setLevel(level=logging.WARNING)
+logging.getLogger("pdfminer.pdfinterp").setLevel(level=logging.WARNING)
 
 app = FastAPI(
     title="Backend API for Planillas-Asistencia",
