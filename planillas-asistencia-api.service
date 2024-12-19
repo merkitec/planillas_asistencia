@@ -1,0 +1,10 @@
+[Unit]
+Description=Planillas Asistencia API
+After=network.target
+
+[Service]
+ExecStart=/bin/bash /home/yhairt/projects/planillas-asistencia-api/execute_docker.sh
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target

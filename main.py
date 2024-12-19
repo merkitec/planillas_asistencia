@@ -21,6 +21,8 @@ logging.basicConfig(level=logging.DEBUG,
 logger = logging.getLogger(__name__)
 logging.getLogger("pdfminer.psparser").setLevel(level=logging.WARNING)
 logging.getLogger("pdfminer.pdfinterp").setLevel(level=logging.WARNING)
+logging.getLogger("pdfminer.pdfpage").setLevel(level=logging.WARNING)
+logging.getLogger("pdfminer.pdfdocument").setLevel(level=logging.WARNING)
 
 app = FastAPI(
     title="Backend API for Planillas-Asistencia",
