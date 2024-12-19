@@ -149,7 +149,8 @@ class PDFtoExcelApp():
             return
         
         # self.progress["value"] = 0
-        threading.Thread(target=self.procesar_pdf).start()
+        # threading.Thread(target=self.procesar_pdf).start()
+        target=self.procesar_pdf()
 
     def procesar_pdf(self):
         fecha_actual = datetime.now().strftime("%y-%m-%d")
